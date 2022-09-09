@@ -24,6 +24,8 @@ resource "aws_instance" "od" {
   }
 }
 
+
+# Locals helps you in reducing the code repetitiveness
 locals {
     ALL_INSTANCE_IDS = concat(aws_instance.od.*.id, aws_spot_instance_request.spot.*.spot_instance_id)
 }
@@ -38,14 +40,6 @@ resource "aws_ec2_tag" "name-tag" {
 }
 
 
-# resource "aws_spot_instance_request" "cheap_worker" {
-#   ami                    = data.aws_ami.base-ami.image_id
-#   instance_type          = "t3.micro"
- 
-#   vpc_security_group_ids = [aws_security_group.allow_all.id]
-
-
-# }
 
 # resource "null_resource" "null" {
 #   triggers = {    
