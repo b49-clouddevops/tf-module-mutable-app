@@ -1,12 +1,12 @@
 # Request a spot instance at $0.03
 resource "aws_spot_instance_request" "cheap_worker" {
-  count                   
+  count                   = var.SPOT_INSTANCE_COUNT
   ami                     = data.aws_ami.ami
   instance_type           = var.INSTANCE_TYPE
-  wait_for_fulfillment   = true 
+  wait_for_fulfillment    = true 
 
   tags = {
-    Name = var.COMPONENT
+    Name = "${var.COMPONENT}-${ENV}
   }
 }
 
