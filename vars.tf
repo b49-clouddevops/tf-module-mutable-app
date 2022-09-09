@@ -5,6 +5,8 @@ variable "OD_INSTANCE_COUNT" {}
 variable "COMPONENT" {}
 variable "APP_PORT" {}
 variable "WORKSPATION_IP" {}
+variable "APP_VERSION" {}
+
 
 
 
