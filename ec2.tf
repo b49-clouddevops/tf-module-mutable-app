@@ -28,7 +28,7 @@ resource "aws_instance" "od" {
 # Creating tags for the spot instance, if not only request tags will be created.
 
 resource "aws_ec2_tag" "example" {
-  resource_id = aws_ec2_instance_id  . . ..  is coming 2 tyoes of resc's which is SPOT and OD.
+  resource_id = 
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}"
 }
