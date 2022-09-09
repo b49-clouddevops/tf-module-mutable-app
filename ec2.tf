@@ -1,11 +1,11 @@
 # Request a spot instance
 resource "aws_spot_instance_request" "spot" {
-  count                   = var.SPOT_INSTANCE_COUNT
+  count                   = var.SPOT_INSTANCE_COUNT  # whenever you use count, you need to use element to pick form the list.
   ami                     = data.aws_ami.ami
   instance_type           = var.INSTANCE_TYPE
   wait_for_fulfillment    = true 
   vpc_security_group_ids  = [aws_security_group.allow_app.id]
-  subnet_id               = 
+  subnet_id               = element(data.)
   tags = {
     Name = "${var.COMPONENT}-${ENV}"
   }
