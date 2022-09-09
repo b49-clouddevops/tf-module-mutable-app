@@ -31,7 +31,7 @@ locals {
 # Creating tags for the spot instance, if not only request tags will be created.
 
 resource "aws_ec2_tag" "name-tag" {
-  resource_id = lcaol.
+  resource_id = 
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}"
 }
