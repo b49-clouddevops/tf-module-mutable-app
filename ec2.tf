@@ -25,6 +25,14 @@ resource "aws_instance" "od" {
 }
 
 
+# Creating tags for the spot instance, if not only request tags will be created.
+
+resource "aws_ec2_tag" "example" {
+  resource_id = aws_vpn_connection.example.transit_gateway_attachment_id
+  key         = "Name"
+  value       = "${var.COMPONENT}-${var.ENV}"
+}
+
 
 # resource "aws_spot_instance_request" "cheap_worker" {
 #   ami                    = data.aws_ami.base-ami.image_id
