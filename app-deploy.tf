@@ -1,7 +1,7 @@
 resource "null_resource" "app_deploy" {
-#   triggers = {    
-#         a = timestamp()  # Everytime you run, when compared to the last time, the time changes, so it will be triggered all the time.
-#   }
+  triggers = {    
+        a = timestamp()  # Everytime you run, when compared to the last time, the time changes, so it will be triggered all the time.
+  }
   count = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT
   provisioner "remote-exec" {
       connection {
