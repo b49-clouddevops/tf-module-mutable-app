@@ -17,3 +17,10 @@ data "terraform_remote_state" "alb" {
     region = "us-east-1"
   }
 }
+
+
+data "aws_ami" "example" {
+  most_recent      = true
+  name_regex       = "base-with-ansible"
+  owners           = ["self"]
+}
