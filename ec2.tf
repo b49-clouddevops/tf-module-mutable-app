@@ -1,5 +1,5 @@
 # Request a spot instance
-resource "aws_spot_instance_request" "cheap_worker" {
+resource "aws_spot_instance_request" "spot" {
   count                   = var.SPOT_INSTANCE_COUNT
   ami                     = data.aws_ami.ami
   instance_type           = var.INSTANCE_TYPE
@@ -10,9 +10,19 @@ resource "aws_spot_instance_request" "cheap_worker" {
   }
 }
 
+# Creates On Demand Instance
+resource "aws_instance" "od" {
+  count                   = var.OD_INSTANCE_COUNT
+  ami                     = data.aws_ami.ami
+  instance_type           =  var.INSTANCE_TYPE
+  vpc_security_group_ids  = [aws_security_group.allow_ssh.id]
 
-
-
+  tags = {
+    Name    = "my-first-ec2"
+    ENV     = "dev"
+    Project = "cc"
+  }
+}
 
 
 
