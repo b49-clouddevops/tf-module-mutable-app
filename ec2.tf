@@ -24,11 +24,14 @@ resource "aws_instance" "od" {
   }
 }
 
+locals {
+    ALL_INSTANCE_IDS = concat(aws_instance.od.*.id, aws_spot_instance_request.spot.*.spot_instance_id)
+}
 
 # Creating tags for the spot instance, if not only request tags will be created.
 
-resource "aws_ec2_tag" "example" {
-  resource_id = concat(aws_instance.od.*.id, aws_spot_instance_request.spot.*.spot_instance_id)
+resource "aws_ec2_tag" "name-tag" {
+  resource_id = lcaol.
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}"
 }
