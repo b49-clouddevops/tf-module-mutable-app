@@ -9,7 +9,7 @@ resource "null_resource" "app_deploy" {
         user     = "centos"
         password = "DevOps321"
         # host     = self.public_ip
-        host     = ?????
+        host     = element(local.ALL_INSTANCE_PRIVATE_IPS, count.index)
       } 
     inline = [
      "ansible-pull -U https://github.com/b49-clouddevops/ansible.git -e COMPONENT=${var.COMPONENT} -e ENV=dev -e TAG_NAME=${var.APP_VERSION} roboshop.yml"
