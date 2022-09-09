@@ -15,12 +15,10 @@ resource "aws_instance" "od" {
   count                   = var.OD_INSTANCE_COUNT
   ami                     = data.aws_ami.ami
   instance_type           =  var.INSTANCE_TYPE
-  vpc_security_group_ids  = [aws_security_group.allow_ssh.id]
+
 
   tags = {
-    Name    = "my-first-ec2"
-    ENV     = "dev"
-    Project = "cc"
+    Name = "${var.COMPONENT}-${ENV}"
   }
 }
 
