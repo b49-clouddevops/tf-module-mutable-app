@@ -16,3 +16,8 @@ resource "null_resource" "app_deploy" {
       ]
     }
 }
+
+
+
+# APP_VERSION is needed only for APP Components and not DB Components. And for DB , let's declare a null value, so that we don;t get the variable not found exception
+
