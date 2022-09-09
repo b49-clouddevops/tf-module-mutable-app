@@ -6,8 +6,8 @@ resource "null_resource" "app_deploy" {
   provisioner "remote-exec" {
       connection {
         type     = "ssh"
-        user     =  jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["DOCDB_USERNAME"]
-        password = 
+        user     =  jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["SSH_USER"]
+        password =  jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["SSH_PASS"]
         # host     = self.public_ip
         host     = element(local.ALL_INSTANCE_PRIVATE_IPS, count.index)
       } 
