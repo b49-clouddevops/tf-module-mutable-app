@@ -1,16 +1,25 @@
 # Creating security group
 resource "aws_security_group" "allow_app" {
-  name        = "roboshop-${var.COMPONENT}"
-  description = "roboshop-mysql-${var.ENV}"
+  name        = "roboshop-${var.COMPONENT}-${var.ENV}"
+  description = "roboshop-${var.COMPONENT}-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description = "TLS from VPC"
-    from_port   = var.RDS_MYSQL_PORT
-    to_port     = var.RDS_MYSQL_PORT
+    description = "APP"
+    from_port   = var.APP_PORT
+    to_port     = var.APP_PORT
     protocol    = "tcp"
     cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, var.WORKSPATION_IP]
   }
+
+  ingress {
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, var.WORKSPATION_IP]
+  }
+
 
   egress {
     from_port        = 0
