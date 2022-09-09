@@ -8,7 +8,8 @@ resource "aws_lb_target_group" "app" {
 
 # Now attachi instances to the created target.
 resource "aws_lb_target_group_attachment" "instance-attach" {
+  count            = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT
   target_group_arn = aws_lb_target_group.app.arn
-  target_id        = local.ALL_INSTANCE_IDS
-  port             = 80
+  target_id        = element(local.ALL_INSTANCE_IDS, count.index)
+  port             = 8080
 }
