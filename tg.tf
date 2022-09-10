@@ -32,7 +32,7 @@ resource "aws_lb_listener_rule" "app_rule" {
 
 
 # The following example shows how to generate a random priority
-# between 100 and 50000 for a aws_alb_listener_rule resource:
+# between 100 and 500 for a aws_alb_listener_rule resource:
 
 resource "random_integer" "lb-rule-priority" {
   min = 100
