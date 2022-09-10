@@ -16,7 +16,7 @@ resource "aws_lb_target_group_attachment" "instance-attach" {
 
 resource "aws_lb_listener_rule" "app_rule" {
   listener_arn = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
-  priority     = 100  
+  priority     = random_integer.lb-rule-priority.result
 
   action {
     type             = "forward"
@@ -32,9 +32,9 @@ resource "aws_lb_listener_rule" "app_rule" {
 
 
 # The following example shows how to generate a random priority
-# between 1 and 50000 for a aws_alb_listener_rule resource:
+# between 100 and 50000 for a aws_alb_listener_rule resource:
 
-resource "random_integer" "priority" {
+resource "random_integer" "lb-rule-priority" {
   min = 100
   max = 500
   }
