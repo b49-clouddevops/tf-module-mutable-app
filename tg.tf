@@ -37,5 +37,5 @@ resource "aws_lb_listener_rule" "app_rule" {
 resource "random_integer" "lb-rule-priority" {
   min = 100
   max = 500
-  }
 }
+
