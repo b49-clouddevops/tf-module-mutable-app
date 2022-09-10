@@ -6,7 +6,7 @@ resource "aws_route53_record" "record" {
   type    = "CNAME"
   ttl     = 60
  # records = var.LB_TYPE == "internal" ? [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_ADDRESS] : [data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ADDRESS]
- record   = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_ADDRESS]
+ records   = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_ADDRESS]
 }
 
 
