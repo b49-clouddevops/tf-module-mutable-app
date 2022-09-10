@@ -34,8 +34,7 @@ resource "aws_lb_listener_rule" "app_rule" {
   }
 }
 
-# Generating a random number for lb rule
-
+# Generating a random number for lb rule in the range of 100 to 500 ;
 resource "random_integer" "lb-rule-priority" {
   min = 100
   max = 500
