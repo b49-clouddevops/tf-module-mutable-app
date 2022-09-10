@@ -1,4 +1,4 @@
-# Creates TG 
+# Creates Private TG 
 resource "aws_lb_target_group" "app" {
   name     = "${var.COMPONENT}-${var.ENV}"
   port     = 8080
@@ -14,7 +14,11 @@ resource "aws_lb_target_group_attachment" "instance-attach" {
   port             = 8080
 }
 
+# Private Listener rules
+# Public Listener , creates only if the LB_TYPE is internal
 resource "aws_lb_listener_rule" "app_rule" {
+  count        = var.LB_TYPE == "intrenal" ? 1 : 0
+
   listener_arn = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
   priority     = random_integer.lb-rule-priority.result
 
@@ -37,3 +41,16 @@ resource "random_integer" "lb-rule-priority" {
   max = 500
 }
 
+
+# Public Listener , creates only if the LB_TYPE is Public
+resource "aws_lb_listener" "public_lb_listener" {
+  count             = var.LB_TYPE == "public" ? 1 : 0
+  load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.app.arn
+  }
+}
