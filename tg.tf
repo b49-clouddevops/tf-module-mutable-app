@@ -14,19 +14,13 @@ resource "aws_lb_target_group_attachment" "instance-attach" {
   port             = 8080
 }
 
-resource "aws_lb_listener_rule" "static" {
-  listener_arn = aws_lb_listener.front_end.arn
+resource "aws_lb_listener_rule" "app_rule" {
+  listener_arn = data.ter aws_lb_listener.front_end.arn
   priority     = 100
 
   action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.static.arn
-  }
-
-  condition {
-    path_pattern {
-      values = ["/static/*"]
-    }
   }
 
   condition {
