@@ -9,7 +9,7 @@ resource "aws_lb_target_group" "app" {
     path                = "/health"
     healthy_threshold   = 2
     unhealthy_threshold = 5
-
+    enabled             true
   }
 }
 
