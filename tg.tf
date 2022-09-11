@@ -11,6 +11,7 @@ resource "aws_lb_target_group" "app" {
     unhealthy_threshold = 2
     enabled             = true
     interval            = 5
+    timeout             = 4
   }
 }
 
