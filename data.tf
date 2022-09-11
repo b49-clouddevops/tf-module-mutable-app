@@ -41,3 +41,13 @@ data "aws_secretsmanager_secret_version" "secrets" {
 output "example" {
   value = jsondecode(data.aws_secretsmanager_secret_version.secrets.secret_string)["DOCDB_USERNAME"]
 }
+
+# Added this for that so that we can fetch the MongoDB DNS Details
+data "terraform_remote_state" "db" {
+  backend = "s3"
+  config = {
+    bucket = "b49-rf-remote-state-bucket"
+    key    = "databases/${var.ENV}/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
